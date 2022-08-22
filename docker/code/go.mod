@@ -1,4 +1,4 @@
-module main_module
+module print_code
 
 go 1.19
 
