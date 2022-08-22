@@ -5,10 +5,30 @@ import (
     "reflect"
     "log"
     "net/http"
+    "database/sql"
+    "time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-    test_server_1()
+    test_query_1()
+    // fmt.Println(secret.db_info)
+}
+
+func test_query_1() {
+    db, err := sql.Open("mysql", "")
+
+    if err != nil {
+        panic(err)
+    }
+    db.SetConnMaxLifetime(time.Minute * 3)
+    db.SetMaxOpenConns(10)
+    db.SetMaxIdleConns(10)
+    
+    fmt.Println("connect success", db)
+    
+    defer db.Close()
 }
 
 func test_server_1() {
